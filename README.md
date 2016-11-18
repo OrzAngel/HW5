@@ -11,8 +11,9 @@ FileReader
     - tell where in the input file this line comes from.
 
 Splitor
-- Split the string into words
-- check whether the word being processed is in a quotation
+- receive one line at each time from FileReader.
+- analyze the string character by character
+- Split the string into words and check whether the word being processed is in a quotation
 
 CharactorSet
 - take in new words from Splitor, update the number of charactors.
