@@ -20,11 +20,7 @@ class FileReader {
 	}
 
 	public String nextLine() {
-		String s = in.nextLine();
-		while (s.equals("")) {
-			s = in.nextLine();
-		}
-		return s;
+		return in.nextLine();
 	}
 
 	public static void main(String[] args) {
