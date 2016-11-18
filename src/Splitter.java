@@ -2,43 +2,34 @@ import java.io.FileNotFoundException;
 
 class Splitter {
 
-	private FileReader in;
-	private String line;
 	private String[] cache;
 	private int index;
 	private boolean quote; // if the word in process is in quote
 	private boolean isSingleQuote; // in case quote in quote.
 	private boolean quoteBuffer;
-	private boolean hasNextWord;
 
-	public Splitter(String path) throws FileNotFoundException {
-		in = new FileReader(path);
+	public Splitter(){
 		quote = false;
 		isSingleQuote = false;
 		quoteBuffer = false;
-		hasNextWord = true;
-		readNextLine();
+		
+		index = 2;
+		cache = new String[1];
+		// bad design but for convenience  at line 31 
 	}
 
 	public boolean isInQuotation() {
 		return quote;
 	}
 	
-	public boolean hasNextWord() {
-		return hasNextWord;
-	}
-
-	public String nextWord() throws NoNextWordException {
+	public String nextWord() throws NeedNewLineException {
 
 		quote = quoteBuffer;
 		
 		for (;;){
 			
 			if (index >= cache.length) {
-				if (!in.hasNextLine()) {
-					throw new NoNextWordException();
-				}
-				readNextLine();
+				throw new NeedNewLineException();
 			}
 
 			String temp = cache[index];
@@ -91,8 +82,8 @@ class Splitter {
 
 	}
 	
-	private void readNextLine() {
-		line = in.nextLine().toLowerCase();
+	public void readNextLine(String line) {
+		line = line.toLowerCase();
 		line.replaceAll("--", "\\s");
 		cache = line.split("[\\s]+");
 		index = 0;
@@ -101,16 +92,19 @@ class Splitter {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		
-		String path = "files/les-mis.txt";
-		Splitter in = new Splitter(path);
+		String path = "files/metamorphosis.txt";
+		FileReader input = new FileReader(path);
+		Splitter sp = new Splitter();
 		
 		for(;;){
 			try {
-				path = in.nextWord();
-			} catch (NoNextWordException e) {
-				// TODO Auto-generated catch block
-				System.out.println(path);
-				break;
+				path = sp.nextWord();
+			} catch (NeedNewLineException e) {
+				if (!input.hasNextLine()) {
+					System.out.println(path);
+					break;
+				}
+				sp.readNextLine(input.nextLine());
 			}
 		}
 		
