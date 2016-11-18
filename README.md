@@ -17,16 +17,16 @@ Splitter
 - Split the string into words and check whether the word being processed is in a quotation
 
 CharactorSet
-- take in new words from Splitor, update the number of charactors.
+- take in new words from Splitter, update the number of charactors.
 - use fixed array, use ascii equivalence as index
 
 
 WordSet (Ec here)
-- take in words from Splitor, store it in an Arraylist / hashmap maintain the number of occurance
+- take in words from Splitter, store it in an Arraylist / hashmap maintain the number of occurrence
 - the stop-list is a wordset
 
 QuotationSet
-- take in words from splitor. record the length of quotations
+- take in words from Splitter. record the length of quotations
 - array list
 
 UI
