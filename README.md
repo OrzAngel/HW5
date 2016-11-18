@@ -12,7 +12,7 @@ FileReader
     - tell where in the input file this line comes from.
 
 Splitter
-- receive one line at each time from FileReader.
+- receive one line at each time through readNextLine().
 - analyze the string character by character
 - Split the string into words and check whether the word being processed is in a quotation
 
