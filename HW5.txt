@@ -1,0 +1,29 @@
+HW5.txt
+
+===========================================================================
+R11.5
+
+	When a method is not capable for solving the problem, or not resiponsible for solving the problem, this method should make the method calling it aware of this problem by throwing an exception. Otherwise this method should catch this exception an solve it.
+
+
+===========================================================================
+R11.7
+
+	The IndexOutOfBoundException is a subclass of RunTimeException. It is not a checked Exception. We are supposed to find the logical flaw in the code before compiling, rather that catch that exception at run time.
+
+===========================================================================
+R11.15
+	
+	It will print the following on the display
+	Bad Data: End of file expected
+
+	We could create a new exception called InvalidFormatException and change the two BadDateException in readDate() to this InvalidFormatException. Make sure add it to the throw list of readData(). Then add a new catch clause in the main method, which could be as simple as System.out.println("Invalid Format: " + exception.getMessage())
+	This way helps us distiguish bad format from bad data
+
+===========================================================================
+R11.17
+
+	The PrintWriter constructor is not in the try clause, so if it throws an exception, the program would crash (However I dont think this code  could compile in the first place.)
+
+	And if we move the out variable declaration into the try clause, the out variable would be avaiable in the try clause only. The complier would complain because the out variable in the finally clause is not decleared.
+
