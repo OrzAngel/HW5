@@ -30,24 +30,6 @@ public class QuoteArray {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		String path = "files/metamorphosis.txt";
-		FileReader input = new FileReader(path);
-		Splitter sp = new Splitter();
-		QuoteArray qa = new QuoteArray();
-		
-		for(;;){
-			try {
-				path = sp.nextWord();
-				qa.addWord(path, sp.isInQuotation());
-			} catch (NeedNewLineException e) {
-				if (!input.hasNextLine()) {
-					break;
-				}
-				sp.readNextLine(input.nextLine());
-			}
-		}
-		System.out.println(path);
 
 	}
-
 }
