@@ -1,13 +1,25 @@
 import java.io.FileNotFoundException;
-
+/**
+ * takes in a string,
+ * split the string into lower case words using white space and double dashes (--)
+ * all punctuation are ignored. </br>
+ * words with single dash (oh-no, ha-ha) are considered as one word</br>
+ * words with single quotation mark (this's, they're) are considered as one word.</br>
+ * the quotation inside a quotation are not considered as a new one, they are part of the outside quotation
+ * @author CJC
+ *
+ */
 class Splitter {
 
 	private String[] cache;
 	private int index;
-	private boolean quote; // if the word in process is in quote
-	private boolean isSingleQuote; // in case quote in quote.
-	private boolean quoteBuffer;
+	private boolean quote; // true if the word in process is in quote
+	private boolean isSingleQuote; // true if the current quote starts with a single quotation mark. in case quote in quote.
+	private boolean quoteBuffer;// true if the previous word is in quote. 
 
+	/**
+	 * create a new object
+	 */
 	public Splitter(){
 		quote = false;
 		isSingleQuote = false;
@@ -17,11 +29,20 @@ class Splitter {
 		cache = new String[1];
 		// bad design but for convenience 
 	}
-
+	
+	/**
+	 * 
+	 * @return true if the word which nextWord() just returned is in quotation
+	 */
 	public boolean isInQuotation() {
 		return quote;
 	}
 	
+	/**
+	 * get the next word in the string.
+	 * @return the next word
+	 * @throws NeedNewLineException when all the words in the string are all extracted
+	 */
 	public String nextWord() throws NeedNewLineException {
 
 		quote = quoteBuffer;
@@ -82,9 +103,14 @@ class Splitter {
 
 	}
 	
+	/**
+	 * take in a new line of string, transfer it to lower case, replace all the "--" with white space.
+	 * Then split the string and restart the index
+	 * @param line
+	 */
 	public void readNextLine(String line) {
 		line = line.toLowerCase();
-		line.replaceAll("--", "\\s");
+		line = line.replaceAll("--", " ");
 		cache = line.split("[\\s]+");
 		index = 0;
 	}
@@ -96,15 +122,13 @@ class Splitter {
 		FileReader input = new FileReader(path);
 		Splitter sp = new Splitter();
 		
+		sp.readNextLine("places huck--sometimes on islands sometimes_!");
+		
 		for(;;){
 			try {
 				path = sp.nextWord();
 			} catch (NeedNewLineException e) {
-				if (!input.hasNextLine()) {
-					System.out.println(path);
-					break;
-				}
-				sp.readNextLine(input.nextLine());
+				break;
 			}
 		}
 		

@@ -39,3 +39,8 @@ design
 
 1) use fixed size array for storing char info, Arraylist for quotation.
 2) use word length for quotation length;
+
+
+flaws 
+1) at least one file (tom-sawer) need to be re-save with encoding UTF-8 (On a Win 7 System). OtherWise the Scanner will not work as supposed.
+2) at least one file (huck-finn) is in a poor format that this program could not handle the quotation correctly. The problem in this file is that there is sometimes one unexpected white space, "Harvey 'd" for example, and the single quotation mark here would be considered not as a part of a word "Harvey'd" but the starting or ending signal of a quotation.
