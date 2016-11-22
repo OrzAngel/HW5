@@ -65,6 +65,22 @@ public class WordSet {
 		return max.get(num);
 	}
 	
+	/**
+	 * wild card
+	 * @param reg the special pattern
+	 * @return all the words contains the string reg
+	 */
+	public ArrayList<String> getWordContains(String reg) {
+		
+		ArrayList<String> ans = new ArrayList<>();
+		for (String word : words.keySet()) {
+			if (word.contains(reg)) {
+				ans.add(word);
+			}
+		}
+		return ans;
+	}
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		String path = "files/tom-sawyer.txt";

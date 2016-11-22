@@ -130,6 +130,11 @@ public class Analyzer {
 			System.out.println(quoteSet.getMin(i));
 		}
 		
+		System.out.println("----------------");
+		System.out.println("The number of words contains at least one letter z");
+		System.out.println(wordSet.getWordContains("z").size());
+	
+		
 	}
 	
 
